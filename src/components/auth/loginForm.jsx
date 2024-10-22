@@ -30,7 +30,6 @@ import Link from "next/link";
 export const LoginForm = () => {
   const searchParams = useSearchParams();
   const errorParam = searchParams.get("error");
-  console.log(errorParam);
   const [onPending, startTransition] = useTransition(false);
 
   const callbackUrl = searchParams.get("callbackUrl");

@@ -17,7 +17,6 @@ export const getTwoFactorByToken = async (token) => {
     const twoFactorToken = await db.twoFactorToken.findUnique({
       where: { token },
     });
-
     return twoFactorToken;
   } catch (error) {
     console.log({ error: error.message });

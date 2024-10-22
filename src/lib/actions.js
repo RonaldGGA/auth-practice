@@ -1,12 +1,6 @@
 "use server";
 import { getUserByEmail, getUserById } from "@/data/user";
-import {
-  forgotPasswordSchema,
-  LoginSchema,
-  RegisterSchema,
-  SettingsSchema,
-  SettingsSchema2,
-} from "@/Schemas";
+import { forgotPasswordSchema, LoginSchema, RegisterSchema } from "@/Schemas";
 import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { signIn } from "@/auth";
@@ -68,12 +62,9 @@ export const login = async (values, callbackUrl = "") => {
       const twoFactorToken = await getTwoFactorByEmail(existingUser.email);
 
       if (!twoFactorToken) {
-        console.log("NO TWO FACTOR");
         return { error: "Invalid code" };
       }
       if (twoFactorToken.token !== code) {
-        console.log("KKKK" + twoFactorToken + " " + code);
-        console.log("DOESNT MATCH");
         return { error: "Invalid code" };
       }
       const hasExpired = new Date(twoFactorToken.expires) < new Date();
@@ -161,7 +152,6 @@ export const register = async (values) => {
 };
 
 export const newVerification = async (token) => {
-  console.log({ TOKEN: token });
   const existingToken = await getTokenByToken(token);
   if (!existingToken) {
     return { error: "Token does not exist" };
@@ -192,7 +182,6 @@ export const newVerification = async (token) => {
 };
 
 export const setNewPassword = async (password, token) => {
-  console.log(token);
   const validValues = forgotPasswordSchema.safeParse(password);
   if (!validValues.success) {
     console.log("INVALID VALUES");

@@ -4,7 +4,7 @@ import { Resend } from "resend";
 const resend = new Resend("re_MxhPGVFw_MgmVo8ez5LtaNhUm3H2jb4gW");
 
 export const sendVerificationEmail = async (email, token) => {
-  const confirmLink = `${process.env.ORIGIN}auth/new-verification?token=${token}`;
+  const confirmLink = `${process.env.ORIGIN}/auth/new-verification?token=${token}`;
 
   await resend.emails.send({
     from: "onboarding@resend.dev",
@@ -19,7 +19,7 @@ export const sendVerificationEmail = async (email, token) => {
 
 export const sendResetPasswordEmail = async (email, token) => {
   console.log("OKEY IM IN THE SENDING PROCESS");
-  const resetLink = `${process.env.ORIGIN}auth/new-password/reset-password?token=${token}`;
+  const resetLink = `${process.env.ORIGIN}/auth/new-password/reset-password?token=${token}`;
 
   await resend.emails.send({
     from: "onboarding@resend.dev",
